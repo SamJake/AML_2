@@ -22,12 +22,18 @@ kyc[,1]
 c <- 12400528
 temp_tran_cluster <- subset(tran,cluster==2)
 flagged <- subset(temp_tran_cluster,ACC_ID==c)
+temp_tran <- flagged$TRAN_ID
 if(nrow(flagged)>0)
 {
-  tran2[]<- 1 #setting AML flag
+  tran2[,TRAN_ID==temp_tran]$aml_flag<- 1 #setting AML flag
 }
 
 
 temp_tran_cluster <- subset(tran,cluster==3)
 flagged <- subset(temp_tran_cluster,ACC_ID==c)
 nrow(flagged)
+
+
+flag_id <- grep(temp_tran,tran2$TRAN_ID)
+tran2[flag_id,8] <- 1
+head(tran2,10)

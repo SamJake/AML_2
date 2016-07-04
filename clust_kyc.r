@@ -1,7 +1,7 @@
 kyc <- read.csv("E:/R/AML_2/Data/kyc.csv")
 
 #Hierarchial Clustering
-distances2 <- dist(kyc[9:13], method="euclidean")
+distances2 <- dist(kyc[9:12], method="euclidean")
 clust2 <- hclust(distances2, method="ward.D2")
 plot(clust2)
 cluster2 <- cutree(clust2,k=3)

@@ -2,39 +2,24 @@
 aml_flag <- matrix(0,ncol = 1,nrow = nrow(tran))
 tran2 <- cbind(tran,aml_flag)
 
-
-for(i in 1:3)#3=k in hierarchial clustering
+n <- 3 
+for(i in c(2,3))
 {
   temp_kyc_cluster <- subset(kyc,cluster2==i)
   for(j in 1:nrow(temp_kyc_cluster))
   {
-    print(temp_kyc_cluster[j,1])
+    temp_acc <- temp_kyc_cluster[j,1]
+    temp_tran_cluster <- subset(tran,cluster==i)
+    flagged <- subset(temp_tran_cluster,ACC_ID==temp_acc)
+    if(nrow(flagged)>0)
+    {
+      for(k in 1:nrow(flagged))
+      {
+        temp_tran <- flagged[k,1]
+        flag_id <- grep(temp_tran,tran2$TRAN_ID)
+        tran2[flag_id,8] <- 1
+      }
+    }
   }
   print(paste("End of ",i,"th cluster"))
 }
-
-temp_kyc_cluster <- subset(kyc,cluster2==1)
-nrow(temp_kyc_cluster)
-kyc[,1]
-
-
-
-c <- 12400528
-temp_tran_cluster <- subset(tran,cluster==2)
-flagged <- subset(temp_tran_cluster,ACC_ID==c)
-temp_tran <- flagged$TRAN_ID
-if(nrow(flagged)>0)
-{
-  flag_id <- grep(temp_tran,tran2$TRAN_ID)
-  tran2[flag_id,8] <- 1
-}
-
-
-#Analyzing other clusters
-temp_tran_cluster <- subset(tran,cluster==3)
-flagged <- subset(temp_tran_cluster,ACC_ID==c)
-nrow(flagged)
-
-temp_tran_cluster <- subset(tran,cluster==1)
-flagged <- subset(temp_tran_cluster,ACC_ID==c)
-nrow(flagged)

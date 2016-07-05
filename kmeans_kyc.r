@@ -8,4 +8,10 @@ sapply(packages,library,character.only=TRUE)
 kyc <- read.csv("E:/R/AML_2/Data/kyc.csv")
 
 set.seed(123)
-k.kyc <- kmeans(kyc,k=3)
+k <- 3
+s.kyc <- scale(kyc[,13])
+k.kyc <- kmeans(s.kyc,k)
+k.kyc$cluster
+
+
+fviz_cluster(k.kyc,data = s.kyc,geom = "point", stand=FALSE, frame.type = "norm")

@@ -34,6 +34,9 @@ for(i in 1:k)
 }
 
 
+kyc_cluster_list[[1]]
+kyc_cluster_list[[2]]
+kyc_cluster_list[[3]]
 
 
 

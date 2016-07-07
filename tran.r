@@ -34,6 +34,8 @@ k <- 3
 for(i in 1:k)
 {
   tran_cluster_list[[i]] <- subset(tran.c,cluster==i)
+  name1 <- abc[i]
+  assign(name1,tran_cluster_list[[i]])
   #names(tran_cluster_list[i]) <- paste("name",i,sep="")
   #tran_cluster_list[[i]] <- subset(tran.c,cluster==i)$ACC_ID
 }
@@ -44,13 +46,16 @@ abc <- c("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r"
 k <- 3
 for(i in 1:k)
 {
-  name1 <- abc[i]
-  name2 <- paste(name1,i,sep="")
+  name1 <- abc[i]#a,b,c
+  name2 <- paste(name1,i,sep="")#a1,b2,c3
+  name3 <- paste(name2,i,sep="")#a11,b22,c33
+  name4 <- paste(name3,"_",sep="")#a11_,b22_,c33_
   acc <- get(name1)[,7]
   bal <- get(name1)[,3]
   assign(name2,aggregate(acc,list(bal),mean))
-  print(name2)
-  #print(acc)
-  #print(bal)
+  assign(name3,aggregate(acc,list(bal),length))
+  l <- get(name2)$x
+  len <- data.frame(x2 = l)
+  assign(name4,cbind(get(name3),len))
 }
 

@@ -33,9 +33,7 @@ for(i in 1:k)
   kyc_cluster_list[[i]] <- subset(kyc.c,cluster2==i)
 }
 
-kyc_cluster_list[[2]]$ACC_ID
-kyc_cluster_list[[2]]$ACC_ID[1]
-length(kyc_cluster_list[[2]]$ACC_ID)
+
 
 
 

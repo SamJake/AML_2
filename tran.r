@@ -37,7 +37,9 @@ for(i in 1:k)
 }
 
 
-
-
-
+for(i in 1:k)
+{
+  assign(paste("temp",i) <- tran_cluster_list[[i]])
+  #assign(paste("temp",i,"ave" <- aggregate(temp1[,7],list(temp1$ACC_ID),mean))
+}
 

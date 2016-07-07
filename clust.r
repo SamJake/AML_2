@@ -12,10 +12,13 @@ tran[is.na(tran)] <- 0
 distances <- dist(tran[7], method="euclidean")
 clust <- hclust(distances, method="ward.D2")
 plot(clust)
+
 jpeg("E:/R/AML_2/Images/Tran_Clusters_Hier.jpeg")
 plot(clust, labels=FALSE, hang = -1.5)
 rect.hclust(clust,k=4,border = 2:4)
 dev.off()
+
+
 cluster <- cutree(clust,k=3)
 cluster
 #Hierarchial Clustering
@@ -24,11 +27,17 @@ jpeg("E:/R/AML_2/Images/Tran_Clusters_Elbow.jpeg")
 fviz_nbclust(tran,hcut,method = "wss") + geom_vline(xintercept = 4, linetype = 2)
 dev.off()
 
-clust_data <- cbind(tran,cluster)
-g <- ggplot(clust_data,aes(x=c(1:371),y=tran$BALANCE,color=factor(clust_data$cluster),group=clust_data$cluster)) + geom_point(size=1.5)
-g <- g + ggtitle("AML 2.0 : Tran Clusters - Suspicious transaction") + xlab("Transactions") + ylab("Account Balance") 
-g <- g + scale_color_manual(values=c("orange","green2","purple"),name="Customer Profiling",labels=c("Low","Mid Range","High"))
-g
-ggsave("E:/R/AML_2/Images/Tran_Clusters_susp.png")
+tran.c <- cbind(tran,cluster)
+
+tran_cluster_list <- list()
+k <- 3
+for(i in 1:k)
+{
+  tran_cluster_list[[i]] <- subset(tran.c,cluster==i)
+}
+
+
+
+
 
 

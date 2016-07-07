@@ -24,17 +24,18 @@ jpeg("E:/R/AML_2/Images/Kyc_Clusters_Elbow.jpeg")
 fviz_nbclust(kyc,hcut,method = "wss") + geom_vline(xintercept = 3, linetype = 2)
 dev.off()
 
+kyc.c <- cbind(kyc,cluster2)
+
+kyc_cluster_list <- list()
+k <- 3
+for(i in 1:k)
+{
+  kyc_cluster_list[[i]] <- subset(kyc.c,cluster2==i)
+}
+
+kyc_cluster_list[[2]]$ACC_ID
+kyc_cluster_list[[2]]$ACC_ID[1]
+length(kyc_cluster_list[[2]]$ACC_ID)
 
 
 
-
-
-
-
-
-clust_data2 <- cbind(kyc,cluster2)
-g2 <- ggplot(clust_data2,aes(x=factor(c(1:12)),y=kyc$INCOME,color=factor(clust_data2$cluster2),group=clust_data2$cluster2)) + geom_point(size=2)
-g2 <- g2 + ggtitle("AML 2.0 : KYC Clusters") + xlab("Customers") + ylab("Annual Income") 
-g2 <- g2 + scale_color_manual(values=c("orange","green2","purple"),name="Customer Profiling",labels=c("Low","Mid Range","High"))
-g2
-ggsave("E:/R/AML_2/Images/Kyc_Clusters.png")

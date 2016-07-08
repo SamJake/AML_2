@@ -1,24 +1,19 @@
-xyz <- kyc_cluster_list
+#Sorting on acc_id internally for each cluster
+backup1 <- kyc_cluster_list
 for( l in 1:length(kyc_cluster_list))
 {
-  print(paste("Unsorted",l))
-  print(kyc_cluster_list[[l]])
   kyc_cluster_list[[l]] <- kyc_cluster_list[[l]][order(kyc_cluster_list[[l]]$ACC_ID),]
-  print(paste("Sorted",l))
-  print(kyc_cluster_list[[l]])
 }
 
-
-xyz1 <- tran_cluster_list_agg
+backup2 <- tran_cluster_list_agg
 for( l in 1:length(tran_cluster_list_agg))
 {
-  print(paste("Unsorted",l))
-  print(tran_cluster_list_agg[[l]])
   tran_cluster_list_agg[[l]] <- tran_cluster_list_agg[[l]][order(tran_cluster_list_agg[[l]]$Group.1),]
-  print(paste("Sorted",l))
-  print(tran_cluster_list_agg[[l]])
 }
 
+
+
+#Calculating means for clusters
 tran_cluster_means <- data.frame(cluster=integer(0),means=numeric(0))
 for( n in 1:length(tran_cluster_list_agg))
 {
@@ -33,4 +28,3 @@ for( n in 1:length(kyc_cluster_list))
   kyc_cluster_means[n,2]  <- sum(kyc_cluster_list[[n]]$INCOME)/length(kyc_cluster_list[[n]]$INCOME)
 }
 
-kyc_cluster_means

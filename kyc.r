@@ -39,4 +39,3 @@ kyc_cluster_list[[2]]
 kyc_cluster_list[[3]]
 
 
-

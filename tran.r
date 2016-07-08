@@ -1,4 +1,3 @@
-library(ggplot2)
 set.seed(123)
 classes <- c("integer","character","integer","character","character","character","character")
 tran <- read.csv("E:/R/AML_2/Data/tran.csv",colClasses = classes)
@@ -57,5 +56,18 @@ for(i in 1:k)
   l <- get(name2)$x
   len <- data.frame(x2 = l)
   assign(name4,cbind(get(name3),len))
+}
+
+#Replacement for above ten lines
+tran_cluster_list_agg <- list()
+for(m in 1:length(tran_cluster_list)) 
+{
+  acc <- tran_cluster_list[[m]][,3]
+  bal <- tran_cluster_list[[m]][,7]
+  temp1 <- aggregate(bal,list(acc),mean)#meansdf
+  temp2 <- aggregate(bal,list(acc),length)#countdf
+  temp3 <- cbind(temp1,temp2)
+  temp3 <- temp3[,-3]
+  tran_cluster_list_agg[[m]] <- temp3
 }
 
